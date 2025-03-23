@@ -41,3 +41,49 @@ if  z_c_< alpha:
 else:
     print("accept")
 print(z_c,p_value)
+
+
+# A company claims their light bulbs last 1200 hours. A sample of 100 bulbs shows a mean of 1170 hours and std dev of 100. Test the claim at 5% level.
+
+import numpy as np 
+from scipy.stats import norm
+import math
+sample_mean=1170
+mu=1200
+sd=100
+n=100
+alpha =0.05
+z= (sample_mean-mu)/(sd/math.sqrt(n))
+z_critical = norm.ppf(1-alpha/2)
+
+margin=z_critical*(sd/ math.sqrt(n))
+ci_low=sample_mean-margin
+ci_high=sample_mean+margin
+
+print("Z-score is:", z)
+print("Z-critical value is:", z_critical)
+print("Confidence interval is:", ci_low, "to", ci_high)
+
+print("If z is more than z critical - reject hO")
+print("If population mean(1200) is outside confidence interval - reject hO")
+
+
+# The average weight of cereal boxes is 500g. A sample of 50 shows a mean of 490g with σ = 30. Is the packing machine faulty?
+import math
+import numpy as np
+from scipy.stats import norm
+mu=500
+n=50
+xbar=490
+sd=30
+alpha=0.05
+z=(xbar-mu)/(sd/math.sqrt(n))
+z_critical=norm.ppf(1-alpha/2)
+margin=z_critical*(sd/math.sqrt(n))
+ci_low=xbar-margin
+ci_high=xbar+margin
+print("Z-score is:", z)
+print("Z-critical value is:", z_critical)
+print("Confidence interval is:", ci_low, "to", ci_high)
+print("If z is more than z critical - reject hO")
+print("If population mean(500) is outside confidence interval - reject hO")
