@@ -1,18 +1,22 @@
 import math
-import numpy as np
+from math import sqrt
 from scipy.stats import norm
-mu=500
-n=50
-xbar=490
-sd=30
-alpha=0.05
-z=(xbar-mu)/(sd/math.sqrt(n))
+p=0.5
+n=200 
+x=130 #(number of people who said yes)
+p_hat= x/n  #(sample proportion)
+alpha =0.05
+z=(p_hat-p) / sqrt(p*(1-p)/n)
 z_critical=norm.ppf(1-alpha/2)
-margin=z_critical*(sd/math.sqrt(n))
-ci_low=xbar-margin
-ci_high=xbar+margin
+
+margin = z_critical * sqrt(p*(1-p)/n)
+ci_low= p_hat - margin
+ci_high= p_hat +margin
+
 print("Z-score is:", z)
 print("Z-critical value is:", z_critical)
 print("Confidence interval is:", ci_low, "to", ci_high)
-print("If z is more than z critical - reject hO")
-print("If population mean(500) is outside confidence interval - reject hO")
+
+print("\n✅ Use this to decide:")
+print("- If |Z| > Z-critical → Reject H0")
+print("- If population proportion (", p, ") is outside the interval → Reject H0")
